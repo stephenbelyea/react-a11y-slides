@@ -2,6 +2,9 @@ import React from 'react';
 
 const INCREMENT = 'INCREMENT';
 const DECREMENT = 'DECREMENT';
+const ARROW_RIGHT = 'ArrowRight';
+const ARROW_LEFT = 'ArrowLeft';
+const BUTTON_FOCUS_TIMEOUT = 500;
 
 class Deck extends React.Component {
   constructor(props) {
@@ -10,6 +13,8 @@ class Deck extends React.Component {
       current: 0
     };
     this.slidesContainer = React.createRef();
+    this.prevButton = React.createRef();
+    this.nextButton = React.createRef();
   }
 
   getLastSlide() {
@@ -19,6 +24,23 @@ class Deck extends React.Component {
   getProgressPercentage() {
     return ((this.state.current + 1) / this.props.slides.length) * 100;
   }
+
+  handleSlidesKeyUp = event => {
+    const { key } = event;
+
+    if (key === ARROW_RIGHT) {
+      this.nextButton.current.focus();
+      setTimeout(() => {
+        this.doNextSlide();
+      }, BUTTON_FOCUS_TIMEOUT);
+    }
+    if (key === ARROW_LEFT) {
+      this.prevButton.current.focus();
+      setTimeout(() => {
+        this.doPrevSlide();
+      }, BUTTON_FOCUS_TIMEOUT);
+    }
+  };
 
   doPrevSlide = () => {
     this.changeCurrentSlide(DECREMENT);
@@ -56,7 +78,12 @@ class Deck extends React.Component {
     const { current } = this.state;
     return (
       <div className="deck">
-        <section className="slides" tabIndex="-1" ref={this.slidesContainer}>
+        <section
+          className="slides"
+          tabIndex="-1"
+          ref={this.slidesContainer}
+          onKeyUp={this.handleSlidesKeyUp}
+        >
           {slides[current]}
         </section>
         <nav className="controls">
@@ -68,6 +95,7 @@ class Deck extends React.Component {
               className="next"
               type="button"
               aria-label="Next slide"
+              ref={this.nextButton}
               onClick={this.doNextSlide}
             >
               <span className="text-icon" aria-hidden="true">
@@ -78,6 +106,7 @@ class Deck extends React.Component {
               className="prev"
               type="button"
               aria-label="Previous slide"
+              ref={this.prevButton}
               onClick={this.doPrevSlide}
             >
               <span className="text-icon" aria-hidden="true">
