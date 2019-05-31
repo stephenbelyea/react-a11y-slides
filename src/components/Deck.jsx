@@ -8,6 +8,7 @@ class Deck extends React.Component {
     this.state = {
       current: 0
     };
+    this.slidesRef = React.createRef();
   }
 
   getLastSlide() {
@@ -15,25 +16,36 @@ class Deck extends React.Component {
   }
 
   changeSlide = (_, direction = INCREMENT) => {
-    this.setState((state, props) => {
-      const prevSlide = state.current;
-      let current = direction === INCREMENT ? prevSlide + 1 : prevSlide - 1;
-      if (current < 0) {
-        return { current: this.getLastSlide() };
+    this.setState(
+      (state, props) => {
+        const prevSlide = state.current;
+        let current = direction === INCREMENT ? prevSlide + 1 : prevSlide - 1;
+        if (current < 0) {
+          return { current: this.getLastSlide() };
+        }
+        if (current > this.getLastSlide()) {
+          return { current: 0 };
+        }
+        return { current };
+      },
+      () => {
+        this.slidesRef.current.focus();
       }
-      if (current > this.getLastSlide()) {
-        return { current: 0 };
-      }
-      return { current };
-    });
+    );
   };
+
+  componentDidMount() {
+    this.slidesRef.current.focus();
+  }
 
   render() {
     const { slides } = this.props;
     const { current } = this.state;
     return (
-      <div className="deck" onClick={this.changeSlide}>
-        <div className="slides">{slides[current]}</div>
+      <div className="deck" aria-live="polite" onClick={this.changeSlide}>
+        <div className="slides" tabIndex="-1" ref={this.slidesRef}>
+          {slides[current]}
+        </div>
       </div>
     );
   }
