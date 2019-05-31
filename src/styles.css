@@ -8,11 +8,11 @@ body {
   height: 100vh;
   display: flex;
   overflow: hidden;
-  flex-direction: row;
+  flex-direction: column;
 }
 
 .slides {
-  width: 100%;
+  padding: 1rem;
   flex-grow: 1;
 }
 
@@ -22,4 +22,37 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+}
+
+.prev-next {
+  display: flex;
+}
+
+.prev-next .prev {
+  order: 1;
+  margin-right: 1rem;
+}
+
+.prev-next .next {
+  order: 2;
+}
+
+.progress {
+  height: .5rem;
+  position: relative;
+}
+
+.progress-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  background: red;
 }
