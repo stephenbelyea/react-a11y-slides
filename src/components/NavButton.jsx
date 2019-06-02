@@ -1,24 +1,11 @@
 import React from 'react';
 import { string, func } from 'prop-types';
+import NavButtonLabel from './NavButtonLabel';
+import refType from '../types';
 import { INCREMENT, LABEL_NEXT, LABEL_PREV } from '../constants';
 
 export function getNextOrPrevLabel(direction) {
   return direction === INCREMENT ? LABEL_NEXT : LABEL_PREV;
-}
-
-export function NavButtonLabel({ direction }) {
-  if (direction === INCREMENT) {
-    return (
-      <span className="text-icon" aria-hidden="true">
-        <span className="text">{LABEL_NEXT}</span> <span className="icon">&gt;</span>
-      </span>
-    );
-  }
-  return (
-    <span className="text-icon" aria-hidden="true">
-      <span className="icon">&lt;</span> <span className="text">{LABEL_PREV}</span>
-    </span>
-  );
 }
 
 function NavButton({ direction, buttonRef, onClick }) {
@@ -39,12 +26,11 @@ function NavButton({ direction, buttonRef, onClick }) {
 
 NavButton.propTypes = {
   direction: string.isRequired,
-  buttonRef: func,
+  buttonRef: refType.isRequired,
   onClick: func
 };
 
 NavButton.defaultProps = {
-  buttonRef: () => {},
   onClick: () => {}
 };
 

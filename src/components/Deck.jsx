@@ -1,4 +1,5 @@
 import React from 'react';
+import { arrayOf, element } from 'prop-types';
 import NavButton from './NavButton';
 import ProgressBar from './ProgressBar';
 import {
@@ -28,16 +29,24 @@ class Deck extends React.Component {
     this.state = {
       current: 0
     };
+    this.handleSlidesKeyUp = this.handleSlidesKeyUp.bind(this);
+    this.doNextSlide = this.doNextSlide.bind(this);
+    this.doPrevSlide = this.doPrevSlide.bind(this);
     this.slidesContainer = React.createRef();
     this.prevButton = React.createRef();
     this.nextButton = React.createRef();
   }
 
-  getLastSlide() {
-    return this.props.slides.length - 1;
+  componentDidMount() {
+    this.slidesContainer.current.focus();
   }
 
-  handleSlidesKeyUp = event => {
+  getLastSlide() {
+    const { slides } = this.props;
+    return slides.length - 1;
+  }
+
+  handleSlidesKeyUp(event) {
     if (shouldDoNextSlide(event)) {
       this.nextButton.current.focus();
       setTimeout(() => {
@@ -50,21 +59,21 @@ class Deck extends React.Component {
         this.doPrevSlide();
       }, BUTTON_FOCUS_TIMEOUT);
     }
-  };
+  }
 
-  doPrevSlide = () => {
+  doPrevSlide() {
     this.changeCurrentSlide(DECREMENT);
-  };
+  }
 
-  doNextSlide = () => {
+  doNextSlide() {
     this.changeCurrentSlide(INCREMENT);
-  };
+  }
 
-  changeCurrentSlide = direction => {
+  changeCurrentSlide(direction) {
     this.setState(
-      (state, props) => {
+      state => {
         const prevSlide = state.current;
-        let current = direction === INCREMENT ? prevSlide + 1 : prevSlide - 1;
+        const current = direction === INCREMENT ? prevSlide + 1 : prevSlide - 1;
         if (current < 0) {
           return { current: this.getLastSlide() };
         }
@@ -77,10 +86,6 @@ class Deck extends React.Component {
         this.slidesContainer.current.focus();
       }
     );
-  };
-
-  componentDidMount() {
-    this.slidesContainer.current.focus();
   }
 
   render() {
@@ -98,7 +103,9 @@ class Deck extends React.Component {
         </section>
         <nav className="controls">
           <div className="counter" role="status">
-            {current + 1} of {slides.length}
+            {current + 1}
+            of
+            {slides.length}
           </div>
           <div className="prev-next">
             <NavButton
@@ -120,5 +127,13 @@ class Deck extends React.Component {
     );
   }
 }
+
+Deck.propTypes = {
+  slides: arrayOf(element)
+};
+
+Deck.defaultProps = {
+  slides: []
+};
 
 export default Deck;
