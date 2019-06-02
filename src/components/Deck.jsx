@@ -1,4 +1,5 @@
 import React from 'react';
+import ProgressBar from './ProgressBar';
 
 const INCREMENT = 'INCREMENT';
 const DECREMENT = 'DECREMENT';
@@ -32,10 +33,6 @@ class Deck extends React.Component {
 
   getLastSlide() {
     return this.props.slides.length - 1;
-  }
-
-  getProgressBarStyles() {
-    return { width: `${((this.state.current + 1) / this.props.slides.length) * 100}%` };
   }
 
   handleSlidesKeyUp = event => {
@@ -127,7 +124,7 @@ class Deck extends React.Component {
           </div>
         </nav>
         <div className="progress" role="presentation" aria-hidden="true">
-          <div className="progress-bar" style={this.getProgressBarStyles()} />
+          <ProgressBar index={current} total={this.getLastSlide()} />
         </div>
       </div>
     );
