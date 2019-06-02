@@ -4,7 +4,8 @@ const INCREMENT = 'INCREMENT';
 const DECREMENT = 'DECREMENT';
 const ARROW_RIGHT = 'ArrowRight';
 const ARROW_LEFT = 'ArrowLeft';
-const BUTTON_FOCUS_TIMEOUT = 500;
+const SPACEBAR = ' ';
+const BUTTON_FOCUS_TIMEOUT = 300;
 
 class Deck extends React.Component {
   constructor(props) {
@@ -26,15 +27,16 @@ class Deck extends React.Component {
   }
 
   handleSlidesKeyUp = event => {
-    const { key } = event;
+    const { key, shiftKey } = event;
 
-    if (key === ARROW_RIGHT) {
+    if (key === ARROW_RIGHT || (key === SPACEBAR && !shiftKey)) {
       this.nextButton.current.focus();
       setTimeout(() => {
         this.doNextSlide();
       }, BUTTON_FOCUS_TIMEOUT);
     }
-    if (key === ARROW_LEFT) {
+
+    if (key === ARROW_LEFT || (key === SPACEBAR && shiftKey)) {
       this.prevButton.current.focus();
       setTimeout(() => {
         this.doPrevSlide();
