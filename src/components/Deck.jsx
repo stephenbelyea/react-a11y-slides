@@ -7,6 +7,18 @@ const ARROW_LEFT = 'ArrowLeft';
 const SPACEBAR = ' ';
 const BUTTON_FOCUS_TIMEOUT = 300;
 
+export function shouldDoNextSlide(keyboardEvent) {
+  const { key, shiftKey } = keyboardEvent;
+
+  return key === ARROW_RIGHT || (key === SPACEBAR && !shiftKey);
+}
+
+export function shouldDoPrevSlide(keyboardEvent) {
+  const { key, shiftKey } = keyboardEvent;
+
+  return key === ARROW_LEFT || (key === SPACEBAR && shiftKey);
+}
+
 class Deck extends React.Component {
   constructor(props) {
     super(props);
@@ -22,21 +34,18 @@ class Deck extends React.Component {
     return this.props.slides.length - 1;
   }
 
-  getProgressPercentage() {
-    return ((this.state.current + 1) / this.props.slides.length) * 100;
+  getProgressBarStyles() {
+    return { width: `${((this.state.current + 1) / this.props.slides.length) * 100}%` };
   }
 
   handleSlidesKeyUp = event => {
-    const { key, shiftKey } = event;
-
-    if (key === ARROW_RIGHT || (key === SPACEBAR && !shiftKey)) {
+    if (shouldDoNextSlide(event)) {
       this.nextButton.current.focus();
       setTimeout(() => {
         this.doNextSlide();
       }, BUTTON_FOCUS_TIMEOUT);
     }
-
-    if (key === ARROW_LEFT || (key === SPACEBAR && shiftKey)) {
+    if (shouldDoPrevSlide(event)) {
       this.prevButton.current.focus();
       setTimeout(() => {
         this.doPrevSlide();
@@ -118,7 +127,7 @@ class Deck extends React.Component {
           </div>
         </nav>
         <div className="progress" role="presentation" aria-hidden="true">
-          <div className="progress-bar" style={{ width: `${this.getProgressPercentage()}%` }} />
+          <div className="progress-bar" style={this.getProgressBarStyles()} />
         </div>
       </div>
     );
