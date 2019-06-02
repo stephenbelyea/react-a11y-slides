@@ -1,12 +1,14 @@
 import React from 'react';
+import NavButton from './NavButton';
 import ProgressBar from './ProgressBar';
-
-const INCREMENT = 'INCREMENT';
-const DECREMENT = 'DECREMENT';
-const ARROW_RIGHT = 'ArrowRight';
-const ARROW_LEFT = 'ArrowLeft';
-const SPACEBAR = ' ';
-const BUTTON_FOCUS_TIMEOUT = 300;
+import {
+  INCREMENT,
+  DECREMENT,
+  ARROW_LEFT,
+  ARROW_RIGHT,
+  SPACEBAR,
+  BUTTON_FOCUS_TIMEOUT
+} from '../constants';
 
 export function shouldDoNextSlide(keyboardEvent) {
   const { key, shiftKey } = keyboardEvent;
@@ -99,32 +101,20 @@ class Deck extends React.Component {
             {current + 1} of {slides.length}
           </div>
           <div className="prev-next">
-            <button
-              className="next"
-              type="button"
-              aria-label="Next slide"
-              ref={this.nextButton}
+            <NavButton
+              direction={INCREMENT}
+              buttonRef={this.nextButton}
               onClick={this.doNextSlide}
-            >
-              <span className="text-icon" aria-hidden="true">
-                <span className="text">next</span> <span className="icon">&gt;</span>
-              </span>
-            </button>
-            <button
-              className="prev"
-              type="button"
-              aria-label="Previous slide"
-              ref={this.prevButton}
+            />
+            <NavButton
+              direction={DECREMENT}
+              buttonRef={this.prevButton}
               onClick={this.doPrevSlide}
-            >
-              <span className="text-icon" aria-hidden="true">
-                <span className="icon">&lt;</span> <span className="icon">prev</span>
-              </span>
-            </button>
+            />
           </div>
         </nav>
         <div className="progress" role="presentation" aria-hidden="true">
-          <ProgressBar index={current} total={this.getLastSlide()} />
+          <ProgressBar current={current} total={this.getLastSlide()} />
         </div>
       </div>
     );
