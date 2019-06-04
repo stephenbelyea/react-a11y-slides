@@ -1,7 +1,6 @@
 import React from 'react';
 import { arrayOf, element } from 'prop-types';
-import NavButton from './NavButton';
-import ProgressBar from './ProgressBar';
+import { NavButton, ProgressBar } from '.';
 import {
   INCREMENT,
   DECREMENT,
@@ -103,9 +102,7 @@ class Deck extends React.Component {
         </section>
         <nav className="controls">
           <div className="counter" role="status">
-            {current + 1}
-            of
-            {slides.length}
+            {`${current + 1} of ${slides.length}`}
           </div>
           <div className="prev-next">
             <NavButton

@@ -7,13 +7,13 @@ function NavButtonLabel({ direction }) {
     return (
       <span className="text-icon" aria-hidden="true">
         <span className="text">{LABEL_NEXT}</span>
-        <span className="icon">&gt;</span>
+        <span className="icon">&nbsp;&gt;</span>
       </span>
     );
   }
   return (
     <span className="text-icon" aria-hidden="true">
-      <span className="icon">&lt;</span>
+      <span className="icon">&lt;&nbsp;</span>
       <span className="text">{LABEL_PREV}</span>
     </span>
   );

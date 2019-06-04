@@ -1,6 +1,6 @@
 import React from 'react';
 import { string, func, oneOfType, shape, instanceOf } from 'prop-types';
-import NavButtonLabel from './NavButtonLabel';
+import { NavButtonLabel } from '.';
 import { INCREMENT, LABEL_NEXT, LABEL_PREV } from '../utilities/constants';
 
 export function getNextOrPrevLabel(direction) {
