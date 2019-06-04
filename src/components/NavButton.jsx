@@ -1,8 +1,7 @@
 import React from 'react';
-import { string, func } from 'prop-types';
+import { string, func, oneOfType, shape, instanceOf } from 'prop-types';
 import NavButtonLabel from './NavButtonLabel';
-import refType from '../types';
-import { INCREMENT, LABEL_NEXT, LABEL_PREV } from '../constants';
+import { INCREMENT, LABEL_NEXT, LABEL_PREV } from '../utilities/constants';
 
 export function getNextOrPrevLabel(direction) {
   return direction === INCREMENT ? LABEL_NEXT : LABEL_PREV;
@@ -26,7 +25,7 @@ function NavButton({ direction, buttonRef, onClick }) {
 
 NavButton.propTypes = {
   direction: string.isRequired,
-  buttonRef: refType.isRequired,
+  buttonRef: oneOfType([func, shape({ current: instanceOf(Element) })]).isRequired,
   onClick: func
 };
 

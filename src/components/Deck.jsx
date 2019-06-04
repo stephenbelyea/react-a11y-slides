@@ -9,7 +9,7 @@ import {
   ARROW_RIGHT,
   SPACEBAR,
   BUTTON_FOCUS_TIMEOUT
-} from '../constants';
+} from '../utilities/constants';
 
 export function shouldDoNextSlide(keyboardEvent) {
   const { key, shiftKey } = keyboardEvent;
