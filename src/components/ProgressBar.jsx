@@ -8,7 +8,10 @@ export function getProgressPercentage(current, total) {
 
 function ProgressBar({ current, total }) {
   return (
-    <div className="progress-bar" style={{ width: `${getProgressPercentage(current, total)}%` }} />
+    <div
+      className="progress-bar bg-red"
+      style={{ width: `${getProgressPercentage(current, total)}%` }}
+    />
   );
 }
 
