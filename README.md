@@ -1,5 +1,7 @@
 # React A11y Slides
 
+![Sample slide with text from The Metamorphosis](./react-a11y-slides-screenshot.png)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
