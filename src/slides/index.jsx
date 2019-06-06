@@ -26,6 +26,18 @@ const slides = [
       His many legs, pitifully thin compared with the size of the rest of him, waved about
       helplessly as he looked.
     </p>
+  </Slide>,
+  <Slide>
+    <h2>Looking for more?</h2>
+    <p>
+      <a
+        href="http://www.gutenberg.org/files/5200/5200-h/5200-h.htm"
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        The Project Gutenberg EBook of Metamorphosis
+      </a>
+    </p>
   </Slide>
 ];
 
