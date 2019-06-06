@@ -101,9 +101,6 @@ class Deck extends React.Component {
           {slides[current]}
         </section>
         <nav className="controls">
-          <div className="counter" role="status">
-            {`${current + 1} of ${slides.length}`}
-          </div>
           <div className="prev-next">
             <NavButton
               direction={INCREMENT}
@@ -115,6 +112,14 @@ class Deck extends React.Component {
               buttonRef={this.prevButton}
               onClick={this.doPrevSlide}
             />
+          </div>
+          <div className="counter" role="status">
+            {`${current + 1} of ${slides.length}`}
+          </div>
+          <div className="settings">
+            <button type="button" className="settings-button">
+              settings
+            </button>
           </div>
         </nav>
         <div className="progress" role="presentation" aria-hidden="true">

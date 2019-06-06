@@ -14,7 +14,7 @@ function NavButton({ direction, buttonRef, onClick }) {
     <button
       type="button"
       ref={buttonRef}
-      className={nextOrPrev}
+      className={`nav-button ${nextOrPrev}`}
       aria-label={`${nextOrPrev} slide`}
       onClick={onClick}
     >

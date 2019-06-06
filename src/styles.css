@@ -28,32 +28,43 @@ h2 {
 }
 
 [type='button'] {
-  font-size: 1.25rem;
-  border: none;
   border-radius: 0.2em;
   padding: 0.5rem 1rem;
+  font-size: 1.25rem;
   text-transform: uppercase;
   cursor: pointer;
+  border: none;
   transition: background 150ms;
 }
 
-[type='button'] .icon {
+.settings-button {
+  border: solid 0.15em;
+  display: block;
+}
+
+.nav-button {
+  border: none;
+}
+
+.nav-button .icon {
   display: inline-block;
   transition: transform 150ms;
 }
 
-[type='button'].next:hover .icon,
-[type='button'].next:focus .icon {
+.nav-button.next:hover .icon,
+.nav-button.next:focus .icon {
   transform: translateX(0.25rem);
 }
 
-[type='button'].prev:hover .icon,
-[type='button'].prev:focus .icon {
+.nav-button.prev:hover .icon,
+.nav-button.prev:focus .icon {
   transform: translateX(-0.25rem);
 }
 
 .black,
-body {
+body,
+a:hover,
+a:focus {
   color: #343434;
 }
 
@@ -63,19 +74,23 @@ a {
 }
 
 .white,
-[type='button'] {
+.nav-button {
   color: white;
 }
 
 .bg-black,
-[type='button']:hover,
-[type='button']:focus {
+.nav-button:hover,
+.nav-button:focus {
   background: #343434;
 }
 
 .bg-red,
-[type='button'] {
+.nav-button {
   background: #cf1020;
+}
+
+a {
+  transition: color 150ms;
 }
 
 .deck {
@@ -105,6 +120,7 @@ a {
   padding: 1.5rem 2rem 1rem;
   justify-content: space-between;
   align-items: center;
+  flex-direction: row-reverse;
 }
 
 .prev-next {
