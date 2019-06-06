@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 export { default as Deck } from './Deck';
 export { default as Slide } from './Slide';
 export { default as NavButton } from './NavButton';
