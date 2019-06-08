@@ -25,6 +25,7 @@ h2 {
 
 [role='status'] {
   font-size: 1.75rem;
+  padding-left: 5rem;
 }
 
 [type='button'] {
@@ -34,12 +35,19 @@ h2 {
   text-transform: uppercase;
   cursor: pointer;
   border: none;
-  transition: background 150ms;
+  transition: background 150ms, color 150ms;
 }
 
 .settings-button {
   border: solid 0.15em;
   display: block;
+}
+
+.settings-button:hover,
+.settings-button:focus {
+  background: #343434;
+  border-color: #343434;
+  color: white;
 }
 
 .nav-button {
@@ -115,12 +123,31 @@ a {
   width: 60vw;
 }
 
-.controls {
+.controls,
+.settings-panel {
   display: flex;
   padding: 1.5rem 2rem 1rem;
-  justify-content: space-between;
   align-items: center;
+}
+
+.controls {
+  justify-content: space-between;
   flex-direction: row-reverse;
+  position: relative;
+}
+
+.settings-panel {
+  justify-content: flex-start;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: #cfcfcf;
+}
+
+.settings-panel[aria-hidden='true'] {
+  display: none;
 }
 
 .prev-next {

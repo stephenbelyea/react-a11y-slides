@@ -120,6 +120,13 @@ class Deck extends React.Component {
             <button type="button" className="settings-button">
               settings
             </button>
+            <div className="settings-panel" aria-hidden="true">
+              <button type="button" className="settings-button">
+                Close
+              </button>
+              <button type="button">Disable Hot Keys</button>
+              <button type="button">Disable Transitions</button>
+            </div>
           </div>
         </nav>
         <div className="progress" role="presentation" aria-hidden="true">
