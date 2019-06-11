@@ -1,5 +1,6 @@
 import React from 'react';
 import { arrayOf, element } from 'prop-types';
+import autoBind from 'react-autobind';
 import { NavButton, ProgressBar } from '.';
 import {
   INCREMENT,
@@ -25,6 +26,7 @@ export function shouldDoPrevSlide(keyboardEvent) {
 class Deck extends React.Component {
   constructor(props) {
     super(props);
+    autoBind(this);
     this.state = {
       current: 0
     };
