@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component, createRef } from 'react';
 import { arrayOf, element } from 'prop-types';
 import autoBind from 'react-autobind';
 import { NavButton, ProgressBar } from '.';
@@ -23,19 +23,20 @@ export function shouldDoPrevSlide(keyboardEvent) {
   return key === ARROW_LEFT || (key === SPACEBAR && shiftKey);
 }
 
-class Deck extends React.Component {
+class Deck extends Component {
   constructor(props) {
     super(props);
     autoBind(this);
     this.state = {
-      current: 0
+      current: 0,
+      settingsMenu: false,
+      enableHotKeys: false
     };
-    this.handleSlidesKeyUp = this.handleSlidesKeyUp.bind(this);
-    this.doNextSlide = this.doNextSlide.bind(this);
-    this.doPrevSlide = this.doPrevSlide.bind(this);
-    this.slidesContainer = React.createRef();
-    this.prevButton = React.createRef();
-    this.nextButton = React.createRef();
+    this.slidesContainer = createRef();
+    this.closeSettingsButton = createRef();
+    this.openSettingsButton = createRef();
+    this.prevButton = createRef();
+    this.nextButton = createRef();
   }
 
   componentDidMount() {
@@ -89,9 +90,31 @@ class Deck extends React.Component {
     );
   }
 
+  toggleSettingsMenu() {
+    this.setState(
+      state => {
+        return { settingsMenu: !state.settingsMenu };
+      },
+      () => {
+        const { settingsMenu } = this.state;
+        if (settingsMenu) {
+          this.closeSettingsButton.current.focus();
+        } else {
+          this.openSettingsButton.current.focus();
+        }
+      }
+    );
+  }
+
+  toggleEnableHotKeys() {
+    this.setState(state => {
+      return { enableHotKeys: !state.enableHotKeys };
+    });
+  }
+
   render() {
     const { slides } = this.props;
-    const { current } = this.state;
+    const { current, settingsMenu, enableHotKeys } = this.state;
     return (
       <div className="deck">
         <section
@@ -119,15 +142,26 @@ class Deck extends React.Component {
             {`${current + 1} of ${slides.length}`}
           </div>
           <div className="settings">
-            <button type="button" className="settings-button">
+            <button
+              type="button"
+              className="settings-button"
+              ref={this.openSettingsButton}
+              onClick={this.toggleSettingsMenu}
+            >
               settings
             </button>
-            <div className="settings-panel" aria-hidden="true">
-              <button type="button" className="settings-button">
-                Close
+            <div className="settings-panel" aria-hidden={!settingsMenu}>
+              <button
+                type="button"
+                className="settings-button"
+                ref={this.closeSettingsButton}
+                onClick={this.toggleSettingsMenu}
+              >
+                close
               </button>
-              <button type="button">Disable Hot Keys</button>
-              <button type="button">Disable Transitions</button>
+              <button type="button" className="settings-button" onClick={this.toggleEnableHotKeys}>
+                {`${enableHotKeys ? 'disable' : 'enable'} hot keys`}
+              </button>
             </div>
           </div>
         </nav>
