@@ -11,15 +11,19 @@ import {
   BUTTON_FOCUS_TIMEOUT
 } from '../utilities/constants';
 
-export function shouldDoNextSlide(keyboardEvent) {
+export function shouldDoNextSlide(keyboardEvent, enableHotKeys = true) {
+  if (!enableHotKeys) {
+    return false;
+  }
   const { key, shiftKey } = keyboardEvent;
-
   return key === ARROW_RIGHT || (key === SPACEBAR && !shiftKey);
 }
 
-export function shouldDoPrevSlide(keyboardEvent) {
+export function shouldDoPrevSlide(keyboardEvent, enableHotKeys = true) {
+  if (!enableHotKeys) {
+    return false;
+  }
   const { key, shiftKey } = keyboardEvent;
-
   return key === ARROW_LEFT || (key === SPACEBAR && shiftKey);
 }
 
@@ -30,11 +34,10 @@ class Deck extends Component {
     this.state = {
       current: 0,
       settingsMenu: false,
-      enableHotKeys: false
+      enableHotKeys: true
     };
     this.slidesContainer = createRef();
     this.closeSettingsButton = createRef();
-    this.openSettingsButton = createRef();
     this.prevButton = createRef();
     this.nextButton = createRef();
   }
@@ -49,13 +52,14 @@ class Deck extends Component {
   }
 
   handleSlidesKeyUp(event) {
-    if (shouldDoNextSlide(event)) {
+    const { enableHotKeys } = this.state;
+    if (shouldDoNextSlide(event, enableHotKeys)) {
       this.nextButton.current.focus();
       setTimeout(() => {
         this.doNextSlide();
       }, BUTTON_FOCUS_TIMEOUT);
     }
-    if (shouldDoPrevSlide(event)) {
+    if (shouldDoPrevSlide(event, enableHotKeys)) {
       this.prevButton.current.focus();
       setTimeout(() => {
         this.doPrevSlide();
@@ -100,7 +104,7 @@ class Deck extends Component {
         if (settingsMenu) {
           this.closeSettingsButton.current.focus();
         } else {
-          this.openSettingsButton.current.focus();
+          this.slidesContainer.current.focus();
         }
       }
     );
