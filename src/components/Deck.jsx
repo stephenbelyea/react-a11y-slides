@@ -11,18 +11,12 @@ import {
   BUTTON_FOCUS_TIMEOUT
 } from '../utilities/constants';
 
-export function shouldDoNextSlide(keyboardEvent, enableHotKeys = true) {
-  if (!enableHotKeys) {
-    return false;
-  }
+export function shouldDoNextSlide(keyboardEvent) {
   const { key, shiftKey } = keyboardEvent;
   return key === ARROW_RIGHT || (key === SPACEBAR && !shiftKey);
 }
 
-export function shouldDoPrevSlide(keyboardEvent, enableHotKeys = true) {
-  if (!enableHotKeys) {
-    return false;
-  }
+export function shouldDoPrevSlide(keyboardEvent) {
   const { key, shiftKey } = keyboardEvent;
   return key === ARROW_LEFT || (key === SPACEBAR && shiftKey);
 }
@@ -53,13 +47,15 @@ class Deck extends Component {
 
   handleSlidesKeyUp(event) {
     const { enableHotKeys } = this.state;
-    if (shouldDoNextSlide(event, enableHotKeys)) {
+    if (!enableHotKeys) return;
+
+    if (shouldDoNextSlide(event)) {
       this.nextButton.current.focus();
       setTimeout(() => {
         this.doNextSlide();
       }, BUTTON_FOCUS_TIMEOUT);
     }
-    if (shouldDoPrevSlide(event, enableHotKeys)) {
+    if (shouldDoPrevSlide(event)) {
       this.prevButton.current.focus();
       setTimeout(() => {
         this.doPrevSlide();
