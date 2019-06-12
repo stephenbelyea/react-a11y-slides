@@ -2,7 +2,8 @@ import React from 'react';
 import { number } from 'prop-types';
 
 export function getProgressPercentage(current, total) {
-  if (total === 0) return 0;
+  if (total === 0 || current < 0) return 0;
+  if (current >= total) return 100;
   return (current / total) * 100;
 }
 
