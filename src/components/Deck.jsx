@@ -1,7 +1,7 @@
 import React, { Component, createRef } from 'react';
 import { arrayOf, element } from 'prop-types';
 import autoBind from 'react-autobind';
-import { NavButton, ProgressBar } from '.';
+import { NavButton, ProgressBar, Counter } from '.';
 import {
   INCREMENT,
   DECREMENT,
@@ -138,9 +138,7 @@ class Deck extends Component {
               onClick={this.doPrevSlide}
             />
           </div>
-          <div className="counter" role="status">
-            {`${current + 1} of ${slides.length}`}
-          </div>
+          <Counter current={current} total={slides.length} />
           <div className="settings">
             <button
               type="button"
