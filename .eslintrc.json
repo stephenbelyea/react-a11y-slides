@@ -5,7 +5,8 @@
     "prettier/prettier": ["error"],
     "jsx-a11y/no-noninteractive-element-interactions": "off",
     "react/jsx-filename-extension": "off",
-    "import/prefer-default-export": "off"
+    "import/prefer-default-export": "off",
+    "import/no-cycle": "off"
   },
   "env": {
     "browser": true,

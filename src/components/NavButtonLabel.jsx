@@ -1,6 +1,6 @@
 import React from 'react';
 import { string } from 'prop-types';
-import { INCREMENT, LABEL_NEXT, LABEL_PREV } from '../utilities/constants';
+import { INCREMENT, LABEL_NEXT, LABEL_PREV } from '../utilities';
 
 function NavButtonLabel({ direction }) {
   if (direction === INCREMENT) {

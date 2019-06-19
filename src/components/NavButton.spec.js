@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import NavButton, { getNextOrPrevLabel } from './NavButton';
-import { INCREMENT, DECREMENT, LABEL_PREV, LABEL_NEXT } from '../utilities/constants';
+import { INCREMENT, DECREMENT, LABEL_PREV, LABEL_NEXT } from '../utilities';
 
 describe('getNextOrPrevLabel', () => {
   it('returns LABEL_PREV by default', () => {

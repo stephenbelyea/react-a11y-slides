@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import NavButtonLabel from './NavButtonLabel';
-import { INCREMENT, DECREMENT, LABEL_NEXT, LABEL_PREV } from '../utilities/constants';
+import { INCREMENT, DECREMENT, LABEL_NEXT, LABEL_PREV } from '../utilities';
 
 const props = {
   direction: INCREMENT
