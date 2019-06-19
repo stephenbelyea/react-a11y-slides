@@ -1,25 +1,14 @@
 import React, { Component, createRef } from 'react';
 import { arrayOf, element } from 'prop-types';
 import autoBind from 'react-autobind';
-import { NavButton, Progress, Counter } from '.';
+import { PrevNext, Progress, Counter } from '.';
 import {
   INCREMENT,
   DECREMENT,
-  ARROW_LEFT,
-  ARROW_RIGHT,
-  SPACEBAR,
-  BUTTON_FOCUS_TIMEOUT
+  BUTTON_FOCUS_TIMEOUT,
+  shouldDoNextSlide,
+  shouldDoPrevSlide
 } from '../utilities';
-
-export function shouldDoNextSlide(keyboardEvent) {
-  const { key, shiftKey } = keyboardEvent;
-  return key === ARROW_RIGHT || (key === SPACEBAR && !shiftKey);
-}
-
-export function shouldDoPrevSlide(keyboardEvent) {
-  const { key, shiftKey } = keyboardEvent;
-  return key === ARROW_LEFT || (key === SPACEBAR && shiftKey);
-}
 
 class Deck extends Component {
   constructor(props) {
@@ -52,23 +41,15 @@ class Deck extends Component {
     if (shouldDoNextSlide(event)) {
       this.nextButton.current.focus();
       setTimeout(() => {
-        this.doNextSlide();
+        this.changeCurrentSlide(INCREMENT);
       }, BUTTON_FOCUS_TIMEOUT);
     }
     if (shouldDoPrevSlide(event)) {
       this.prevButton.current.focus();
       setTimeout(() => {
-        this.doPrevSlide();
+        this.changeCurrentSlide(DECREMENT);
       }, BUTTON_FOCUS_TIMEOUT);
     }
-  }
-
-  doPrevSlide() {
-    this.changeCurrentSlide(DECREMENT);
-  }
-
-  doNextSlide() {
-    this.changeCurrentSlide(INCREMENT);
   }
 
   changeCurrentSlide(direction) {
@@ -126,18 +107,11 @@ class Deck extends Component {
           {slides[current]}
         </section>
         <nav className="controls">
-          <div className="prev-next">
-            <NavButton
-              direction={INCREMENT}
-              buttonRef={this.nextButton}
-              onClick={this.doNextSlide}
-            />
-            <NavButton
-              direction={DECREMENT}
-              buttonRef={this.prevButton}
-              onClick={this.doPrevSlide}
-            />
-          </div>
+          <PrevNext
+            nextButtonRef={this.nextButton}
+            prevButtonRef={this.prevButton}
+            onClick={this.changeCurrentSlide}
+          />
           <Counter current={current} total={slides.length} />
           <div className="settings">
             <button
