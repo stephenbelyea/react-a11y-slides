@@ -1,3 +1,4 @@
+export { refType } from './types';
 export {
   INCREMENT,
   DECREMENT,
