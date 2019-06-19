@@ -1,7 +1,7 @@
 import React, { Component, createRef } from 'react';
 import { arrayOf, element } from 'prop-types';
 import autoBind from 'react-autobind';
-import { NavButton, ProgressBar, Counter } from '.';
+import { NavButton, Progress, Counter } from '.';
 import {
   INCREMENT,
   DECREMENT,
@@ -163,9 +163,7 @@ class Deck extends Component {
             </div>
           </div>
         </nav>
-        <div className="progress" role="presentation" aria-hidden="true">
-          <ProgressBar current={current} total={this.getLastSlide()} />
-        </div>
+        <Progress current={current} total={this.getLastSlide()} />
       </div>
     );
   }
