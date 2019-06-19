@@ -4,7 +4,8 @@
   "rules": {
     "prettier/prettier": ["error"],
     "jsx-a11y/no-noninteractive-element-interactions": "off",
-    "react/jsx-filename-extension": "off"
+    "react/jsx-filename-extension": "off",
+    "import/prefer-default-export": "off"
   },
   "env": {
     "browser": true,

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Slide } from '../components';
 
-const slides = [
+const sampleSlides = [
   <Slide>
     <h1>Metamorphosis</h1>
     <p>by Franz Kafka</p>
@@ -41,4 +41,4 @@ const slides = [
   </Slide>
 ];
 
-export default slides;
+export default sampleSlides;
