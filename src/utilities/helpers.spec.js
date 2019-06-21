@@ -1,5 +1,55 @@
-import { getProgressPercentage, getNextOrPrevLabel, getCounterLabel } from './helpers';
-import { LABEL_NEXT, LABEL_PREV, DECREMENT, INCREMENT } from './constants';
+import {
+  shouldDoNextSlide,
+  getProgressPercentage,
+  getNextOrPrevLabel,
+  getCounterLabel,
+  shouldDoPrevSlide
+} from './helpers';
+import {
+  LABEL_NEXT,
+  LABEL_PREV,
+  DECREMENT,
+  INCREMENT,
+  ARROW_RIGHT,
+  ARROW_LEFT,
+  SPACEBAR
+} from './constants';
+
+describe('shouldDoNextSlide', () => {
+  it('should return true if key is ARROW_RIGHT', () => {
+    expect(shouldDoNextSlide({ key: ARROW_RIGHT })).toBe(true);
+  });
+
+  it('should return true if key is SPACEBAR', () => {
+    expect(shouldDoNextSlide({ key: SPACEBAR })).toBe(true);
+  });
+
+  it('should return false if key is SPACEBAR and shiftKey is active', () => {
+    expect(shouldDoNextSlide({ key: SPACEBAR, shiftKey: true })).toBe(false);
+  });
+
+  it('should return false if key is anything else', () => {
+    expect(shouldDoNextSlide({ key: ARROW_LEFT })).toBe(false);
+  });
+});
+
+describe('shouldDoPrevSlide', () => {
+  it('should return true if key is ARROW_LEFT', () => {
+    expect(shouldDoPrevSlide({ key: ARROW_LEFT })).toBe(true);
+  });
+
+  it('should return true if key is SPACEBAR and shiftKey is active', () => {
+    expect(shouldDoPrevSlide({ key: SPACEBAR, shiftKey: true })).toBe(true);
+  });
+
+  it('should return false if key is SPACEBAR and shiftKey is not active', () => {
+    expect(shouldDoPrevSlide({ key: SPACEBAR, shiftKey: false })).toBe(false);
+  });
+
+  it('should return false if key is anything else', () => {
+    expect(shouldDoPrevSlide({ key: ARROW_RIGHT })).toBe(false);
+  });
+});
 
 describe('getProgressPercentage', () => {
   it('returns 0 when passed total of 0', () => {
