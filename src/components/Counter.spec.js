@@ -1,21 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import Counter, { getCounterLabel } from './Counter';
-
-describe('getCounterLabel', () => {
-  it('returns null when total is 0', () => {
-    expect(getCounterLabel(0, 0)).toBe(null);
-  });
-
-  it('returns x of x when total is passed', () => {
-    expect(getCounterLabel(0, 1)).toBe('1 of 1');
-  });
-
-  it('returns current adjusted from array index', () => {
-    expect(getCounterLabel(1, 2)).toBe('2 of 2');
-  });
-});
+import Counter from './Counter';
 
 describe('<Counter />', () => {
   const wrapper = shallow(<Counter />);

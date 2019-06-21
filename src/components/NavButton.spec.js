@@ -1,22 +1,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import NavButton, { getNextOrPrevLabel } from './NavButton';
-import { INCREMENT, DECREMENT, LABEL_PREV, LABEL_NEXT } from '../utilities';
-
-describe('getNextOrPrevLabel', () => {
-  it('returns LABEL_PREV by default', () => {
-    expect(getNextOrPrevLabel()).toBe(LABEL_PREV);
-  });
-
-  it('returns LABEL_PREV when passed direction DECREMENT', () => {
-    expect(getNextOrPrevLabel(DECREMENT)).toBe(LABEL_PREV);
-  });
-
-  it('returns LABEL_NEXT when passed direction INCREMENT', () => {
-    expect(getNextOrPrevLabel(INCREMENT)).toBe(LABEL_NEXT);
-  });
-});
+import NavButton from './NavButton';
+import { INCREMENT, LABEL_NEXT } from '../utilities';
 
 const props = {
   direction: INCREMENT,

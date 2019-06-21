@@ -1,10 +1,6 @@
 import React from 'react';
 import { number } from 'prop-types';
-
-export function getCounterLabel(current, total) {
-  if (total === 0) return null;
-  return `${current + 1} of ${total}`;
-}
+import { getCounterLabel } from '../utilities';
 
 function Counter({ current, total }) {
   return (

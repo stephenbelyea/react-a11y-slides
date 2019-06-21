@@ -1,11 +1,7 @@
 import React from 'react';
 import { string, func } from 'prop-types';
 import { NavButtonLabel } from '.';
-import { INCREMENT, LABEL_NEXT, LABEL_PREV, refType } from '../utilities';
-
-export function getNextOrPrevLabel(direction) {
-  return direction === INCREMENT ? LABEL_NEXT : LABEL_PREV;
-}
+import { refType, getNextOrPrevLabel } from '../utilities';
 
 function NavButton({ direction, buttonRef, onClick }) {
   const nextOrPrev = getNextOrPrevLabel(direction);

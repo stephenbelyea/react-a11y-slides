@@ -1,5 +1,11 @@
 export { refType } from './types';
-export { shouldDoNextSlide, shouldDoPrevSlide } from './helpers';
+export {
+  shouldDoNextSlide,
+  shouldDoPrevSlide,
+  getProgressPercentage,
+  getNextOrPrevLabel,
+  getCounterLabel
+} from './helpers';
 export {
   INCREMENT,
   DECREMENT,

@@ -1,39 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import Progress, { getProgressPercentage } from './Progress';
-
-describe('getProgressPercentage', () => {
-  it('returns 0 when passed total of 0', () => {
-    const percentage = getProgressPercentage(1, 0);
-    expect(percentage).toBe(0);
-  });
-
-  it('returns 0 when passed current less than 0', () => {
-    const percentage = getProgressPercentage(-1, 1);
-    expect(percentage).toBe(0);
-  });
-
-  it('returns 100 when passed current equal to total', () => {
-    const percentage = getProgressPercentage(1, 1);
-    expect(percentage).toBe(100);
-  });
-
-  it('returns 100 when passed current larger than total', () => {
-    const percentage = getProgressPercentage(2, 1);
-    expect(percentage).toBe(100);
-  });
-
-  it('returns 50 when passed current 1/2 of total', () => {
-    const percentage = getProgressPercentage(1, 2);
-    expect(percentage).toBe(50);
-  });
-
-  it('returns 25 when passed current 1/4 of total', () => {
-    const percentage = getProgressPercentage(1, 4);
-    expect(percentage).toBe(25);
-  });
-});
+import Progress from './Progress';
 
 describe('<ProgressBar />', () => {
   const wrapper = shallow(<Progress />);
