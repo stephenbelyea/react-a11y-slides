@@ -14,4 +14,9 @@ describe('<PrevNext />', () => {
   it('renders without crashing', () => {
     expect(wrapper).toBeTruthy();
   });
+
+  it('returns a div with .prev-next class', () => {
+    expect(wrapper.type()).toBe('div');
+    expect(wrapper.hasClass('prev-next')).toBe(true);
+  });
 });

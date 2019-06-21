@@ -1,7 +1,7 @@
 import React, { Component, createRef } from 'react';
 import { arrayOf, element } from 'prop-types';
 import autoBind from 'react-autobind';
-import { PrevNext, Progress, Counter } from '.';
+import { PrevNext, Progress, Counter, Settings } from '.';
 import {
   INCREMENT,
   DECREMENT,
@@ -16,11 +16,9 @@ class Deck extends Component {
     autoBind(this);
     this.state = {
       current: 0,
-      settingsMenu: false,
       enableHotKeys: true
     };
     this.slidesContainer = createRef();
-    this.closeSettingsButton = createRef();
     this.prevButton = createRef();
     this.nextButton = createRef();
   }
@@ -71,22 +69,6 @@ class Deck extends Component {
     );
   }
 
-  toggleSettingsMenu() {
-    this.setState(
-      state => {
-        return { settingsMenu: !state.settingsMenu };
-      },
-      () => {
-        const { settingsMenu } = this.state;
-        if (settingsMenu) {
-          this.closeSettingsButton.current.focus();
-        } else {
-          this.slidesContainer.current.focus();
-        }
-      }
-    );
-  }
-
   toggleEnableHotKeys() {
     this.setState(state => {
       return { enableHotKeys: !state.enableHotKeys };
@@ -95,7 +77,7 @@ class Deck extends Component {
 
   render() {
     const { slides } = this.props;
-    const { current, settingsMenu, enableHotKeys } = this.state;
+    const { current, enableHotKeys } = this.state;
     return (
       <div className="deck">
         <section
@@ -113,29 +95,11 @@ class Deck extends Component {
             onClick={this.changeCurrentSlide}
           />
           <Counter current={current} total={slides.length} />
-          <div className="settings">
-            <button
-              type="button"
-              className="settings-button"
-              ref={this.openSettingsButton}
-              onClick={this.toggleSettingsMenu}
-            >
-              settings
-            </button>
-            <div className="settings-panel" aria-hidden={!settingsMenu}>
-              <button
-                type="button"
-                className="settings-button"
-                ref={this.closeSettingsButton}
-                onClick={this.toggleSettingsMenu}
-              >
-                close
-              </button>
-              <button type="button" className="settings-button" onClick={this.toggleEnableHotKeys}>
-                {`${enableHotKeys ? 'disable' : 'enable'} hot keys`}
-              </button>
-            </div>
-          </div>
+          <Settings
+            enableHotKeys={enableHotKeys}
+            toggleEnableHotKeys={this.toggleEnableHotKeys}
+            exitFocusRef={this.slidesContainer}
+          />
         </nav>
         <Progress current={current} total={this.getLastSlide()} />
       </div>
